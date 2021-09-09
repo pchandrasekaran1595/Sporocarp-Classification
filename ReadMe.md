@@ -1,4 +1,4 @@
-Edible Vs Poisonous and Mushroom vs Non-Mushroom Sporocarp Classification. Download the dataset from https://www.kaggle.com/marcosvolpato/edible-and-poisonous-fungi and extract it into a folder by the name, Data.
+Edible Vs Poisonous and Mushroom vs Non-Mushroom Sporocarp Classification. Download the dataset from https://www.kaggle.com/marcosvolpato/edible-and-poisonous-fungi and extract it into a folder by the name, Data. If extracted into a different folder, specify `--path` during run.
 
 ---
 
