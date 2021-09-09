@@ -6,7 +6,7 @@ from time import time
 
 import utils as u
 
-#########################################################################################################
+#####################################################################################################
 
 def fit(model=None, optimizer=None, scheduler=None, epochs=None,
         dataloaders=None, early_stopping_patience=None, verbose=False):
@@ -102,7 +102,7 @@ Train Accs: {:.5f} | Valid Accs: {:.5f} | Time: {:.2f} seconds".format(e+1,
 
     return Losses, Accuracies, BLE, BAE
 
-#########################################################################################################
+#####################################################################################################
 
 def predict_batch(model=None, dataloader=None, mode="test"):
     model.load_state_dict(torch.load(os.path.join(u.CHECKPOINT_PATH, "state.pt"))["model_state_dict"])
@@ -123,13 +123,18 @@ def predict_batch(model=None, dataloader=None, mode="test"):
     
     return y_pred[1:].detach().cpu().numpy()
 
-#########################################################################################################
+#####################################################################################################
 
 def predict(model=None, image=None, size=None, transform=None):
     image = u.downscale(image, size=size)
+
+    model.load_state_dict(torch.load(os.path.join(u.CHECKPOINT_PATH, "state.pt"))["model_state_dict"])
+    model.to(u.DEVICE)
+    model.eval()
 
     with torch.no_grad():
         output = torch.argmax(model(transform(image).unsqueeze(dim=0).to(u.DEVICE)), dim=1)
     return u.LABELS[output.item()]
 
-#########################################################################################################
+#####################################################################################################
+
